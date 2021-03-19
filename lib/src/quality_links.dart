@@ -16,8 +16,8 @@ class QualityLinks {
 
   Future<SplayTreeMap> getQualitiesAsync() async {
     try {
-      var response = await http
-          .get('https://player.vimeo.com/video/' + videoId + '/config');
+      var response = await http.get(
+          Uri.parse('https://player.vimeo.com/video/' + videoId + '/config'));
       var jsonData =
           jsonDecode(response.body)['request']['files']['progressive'];
       SplayTreeMap videoList = SplayTreeMap.fromIterable(jsonData,

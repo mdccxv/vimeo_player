@@ -29,7 +29,12 @@ class FullscreenPlayer extends StatefulWidget {
     this.position,
     this.initFuture,
     this.qualityValue,
-    Key key, this.iconColor, this.sliderPlayedColor, this.sliderBufferedColor, this.videoStartStyle, this.videoEndStyle,
+    Key key,
+    this.iconColor,
+    this.sliderPlayedColor,
+    this.sliderBufferedColor,
+    this.videoStartStyle,
+    this.videoEndStyle,
   }) : super(key: key);
 
   @override
@@ -212,8 +217,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                   margin:
                       EdgeInsets.fromLTRB(0, 0, doubleTapLWidthFS / 2 + 30, 40),
                   decoration: BoxDecoration(
-                    //color: Colors.red,
-                  ),
+                      //color: Colors.red,
+                      ),
                 ),
                 //Редактируем размер области дабл тапа при показе оверлея.
                 // Сделано для открытия кнопок "Во весь экран" и "Качество"
@@ -246,8 +251,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                   margin: EdgeInsets.fromLTRB(doubleTapRWidthFS / 2 + 45, 0, 0,
                       doubleTapLMarginFS + 20),
                   decoration: BoxDecoration(
-                    //color: Colors.red,
-                  ),
+                      //color: Colors.red,
+                      ),
                 ),
                 //Редактируем размер области дабл тапа при показе оверлея.
                 // Сделано для открытия кнопок "Во весь экран" и "Качество"
@@ -337,7 +342,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                     ),
                     icon: _controller.value.isPlaying
                         ? Icon(Icons.pause, size: 60.0, color: widget.iconColor)
-                        : Icon(Icons.play_arrow, size: 60.0, color: widget.iconColor),
+                        : Icon(Icons.play_arrow,
+                            size: 60.0, color: widget.iconColor),
                     onPressed: () {
                       setState(() {
                         _controller.value.isPlaying
@@ -351,7 +357,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                     top: videoHeight - 80, left: videoWidth + videoMargin - 50),
                 child: IconButton(
                     alignment: AlignmentDirectional.center,
-                    icon: Icon(Icons.fullscreen, size: 30.0, color: widget.iconColor),
+                    icon: Icon(Icons.fullscreen,
+                        size: 30.0, color: widget.iconColor),
                     onPressed: () {
                       setState(() {
                         _controller.pause();
@@ -369,7 +376,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
               Container(
                 margin: EdgeInsets.only(left: videoWidth + videoMargin - 48),
                 child: IconButton(
-                    icon: Icon(Icons.settings, size: 26.0, color: widget.iconColor),
+                    icon: Icon(Icons.settings,
+                        size: 26.0, color: widget.iconColor),
                     onPressed: () {
                       position = _controller.value.position.inSeconds;
                       _seek = true;
@@ -393,16 +401,19 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
     return ValueListenableBuilder(
       valueListenable: _controller,
       builder: (context, VideoPlayerValue value, child) {
-        if (!value.hasError && value.initialized) {
+        if (!value.hasError && value.isInitialized) {
           return Row(
             children: <Widget>[
               Container(
                 width: 46,
                 alignment: Alignment(0, 0),
-                child: Text(value.position.inMinutes.toString() +
-                    ':' +
-                    (value.position.inSeconds - value.position.inMinutes * 60)
-                        .toString(), style: widget.videoStartStyle),
+                child: Text(
+                    value.position.inMinutes.toString() +
+                        ':' +
+                        (value.position.inSeconds -
+                                value.position.inMinutes * 60)
+                            .toString(),
+                    style: widget.videoStartStyle),
               ),
               Container(
                 height: 20,
@@ -411,9 +422,13 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                   _controller,
                   allowScrubbing: true,
                   colors: VideoProgressColors(
-                     playedColor: widget.sliderPlayedColor == null ? Color(0xFF22A3D2) : widget.sliderPlayedColor,
+                    playedColor: widget.sliderPlayedColor == null
+                        ? Color(0xFF22A3D2)
+                        : widget.sliderPlayedColor,
                     backgroundColor: Color(0x5515162B),
-                    bufferedColor: widget.sliderBufferedColor == null ?Color(0x5583D8F7): widget.sliderBufferedColor,
+                    bufferedColor: widget.sliderBufferedColor == null
+                        ? Color(0x5583D8F7)
+                        : widget.sliderBufferedColor,
                   ),
                   padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                 ),
@@ -421,10 +436,13 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
               Container(
                 width: 46,
                 alignment: Alignment(0, 0),
-                child: Text(value.duration.inMinutes.toString() +
-                    ':' +
-                    (value.duration.inSeconds - value.duration.inMinutes * 60)
-                        .toString(),style: widget.videoEndStyle),
+                child: Text(
+                    value.duration.inMinutes.toString() +
+                        ':' +
+                        (value.duration.inSeconds -
+                                value.duration.inMinutes * 60)
+                            .toString(),
+                    style: widget.videoEndStyle),
               ),
             ],
           );

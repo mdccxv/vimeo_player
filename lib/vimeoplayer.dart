@@ -26,7 +26,12 @@ class VimeoPlayer extends StatefulWidget {
     this.looping,
     this.videoMarginTop,
     this.position,
-    Key key, this.iconColor, this.sliderPlayedColor, this.sliderBufferedColor, this.videoStartStyle, this.videoEndStyle,
+    Key key,
+    this.iconColor,
+    this.sliderPlayedColor,
+    this.sliderBufferedColor,
+    this.videoStartStyle,
+    this.videoEndStyle,
   }) : super(key: key);
 
   @override
@@ -43,7 +48,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
   double _videoMarginTop = 0;
   int position;
 
-  _VimeoPlayerState(this._id, this.autoPlay, this.looping, this.position, this._videoMarginTop);
+  _VimeoPlayerState(this._id, this.autoPlay, this.looping, this.position,
+      this._videoMarginTop);
 
   //Custom controller
   VideoPlayerController _controller;
@@ -69,8 +75,6 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
   double doubleTapLMargin = 10;
   double doubleTapLWidth = 400;
   double doubleTapLHeight = 160;
-
-  
 
   @override
   void initState() {
@@ -104,10 +108,6 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
   //Отрисовываем элементы плеера
   @override
   Widget build(BuildContext context) {
-
-  
-    
-
     return Center(
         child: Stack(
       alignment: AlignmentDirectional.center,
@@ -150,7 +150,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                       Container(
                         height: videoHeight,
                         width: videoWidth,
-                        margin: EdgeInsets.only(left: videoMargin, top: _videoMarginTop),
+                        margin: EdgeInsets.only(
+                            left: videoMargin, top: _videoMarginTop),
                         child: VideoPlayer(_controller),
                       ),
                       _videoOverlay(_videoMarginTop),
@@ -193,8 +194,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
               margin: EdgeInsets.fromLTRB(
                   0, 10, doubleTapLWidth / 2 + 30, doubleTapLMargin + 20),
               decoration: BoxDecoration(
-                //color: Colors.red,
-              ),
+                  //color: Colors.red,
+                  ),
             ),
 
             // Изменение размера блоков дабл тапа. Нужно для открытия кнопок
@@ -229,8 +230,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
               margin: EdgeInsets.fromLTRB(doubleTapRWidth / 2 + 45,
                   doubleTapRMargin, 0, doubleTapRMargin + 20),
               decoration: BoxDecoration(
-                //color: Colors.red,
-              ),
+                  //color: Colors.red,
+                  ),
             ),
             // Изменение размера блоков дабл тапа. Нужно для открытия кнопок
             // "Во весь экран" и "Качество" при включенном overlay
@@ -295,8 +296,10 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
   Widget _videoOverlay(double settingsMarginTop) {
     return _overlay
         ? Container(
-          margin: EdgeInsets.only(top: 0.0,),
-          child: Stack(
+            margin: EdgeInsets.only(
+              top: 0.0,
+            ),
+            child: Stack(
               children: <Widget>[
                 GestureDetector(
                   child: Center(
@@ -322,8 +325,13 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                           top: videoHeight / 2 - 30,
                           bottom: videoHeight / 2 - 30),
                       icon: _controller.value.isPlaying
-                          ? Icon(Icons.pause, size: 60.0, color: widget.iconColor,)
-                          : Icon(Icons.play_arrow, size: 60.0, color: widget.iconColor),
+                          ? Icon(
+                              Icons.pause,
+                              size: 60.0,
+                              color: widget.iconColor,
+                            )
+                          : Icon(Icons.play_arrow,
+                              size: 60.0, color: widget.iconColor),
                       onPressed: () {
                         setState(() {
                           _controller.value.isPlaying
@@ -334,10 +342,12 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                 ),
                 Container(
                   margin: EdgeInsets.only(
-                      top: videoHeight - 70 + _videoMarginTop, left: videoWidth + videoMargin - 50),
+                      top: videoHeight - 70 + _videoMarginTop,
+                      left: videoWidth + videoMargin - 50),
                   child: IconButton(
                       alignment: AlignmentDirectional.center,
-                      icon: Icon(Icons.fullscreen, size: 30.0, color: widget.iconColor),
+                      icon: Icon(Icons.fullscreen,
+                          size: 30.0, color: widget.iconColor),
                       onPressed: () async {
                         setState(() {
                           _controller.pause();
@@ -352,17 +362,20 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                                 opaque: false,
                                 pageBuilder: (BuildContext context, _, __) =>
                                     FullscreenPlayer(
-                                        id: _id,
-                                        autoPlay: true,
-                                        controller: _controller,
-                                        position:
-                                            _controller.value.position.inSeconds,
-                                        initFuture: initFuture,
-                                        qualityValue: _qualityValue,
-                                        videoStartStyle: widget.videoStartStyle,
-                                        videoEndStyle: widget.videoEndStyle,
-                                        sliderPlayedColor: widget.sliderPlayedColor,
-                                        sliderBufferedColor: widget.sliderBufferedColor,),
+                                      id: _id,
+                                      autoPlay: true,
+                                      controller: _controller,
+                                      position:
+                                          _controller.value.position.inSeconds,
+                                      initFuture: initFuture,
+                                      qualityValue: _qualityValue,
+                                      videoStartStyle: widget.videoStartStyle,
+                                      videoEndStyle: widget.videoEndStyle,
+                                      sliderPlayedColor:
+                                          widget.sliderPlayedColor,
+                                      sliderBufferedColor:
+                                          widget.sliderBufferedColor,
+                                    ),
                                 transitionsBuilder: (___,
                                     Animation<double> animation,
                                     ____,
@@ -380,9 +393,12 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                       }),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: videoWidth + videoMargin - 48, top: settingsMarginTop),
+                  margin: EdgeInsets.only(
+                      left: videoWidth + videoMargin - 48,
+                      top: settingsMarginTop),
                   child: IconButton(
-                      icon: Icon(Icons.settings, size: 26.0, color: widget.iconColor),
+                      icon: Icon(Icons.settings,
+                          size: 26.0, color: widget.iconColor),
                       onPressed: () {
                         position = _controller.value.position.inSeconds;
                         _seek = true;
@@ -398,7 +414,7 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                 )
               ],
             ),
-        )
+          )
         : Center(
             child: Container(
               height: 5,
@@ -408,9 +424,13 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                 _controller,
                 allowScrubbing: true,
                 colors: VideoProgressColors(
-                   playedColor: widget.sliderPlayedColor == null ? Color(0xFF22A3D2) : widget.sliderPlayedColor,
-                    backgroundColor: Color(0x5515162B),
-                    bufferedColor: widget.sliderBufferedColor == null ?Color(0x5583D8F7): widget.sliderBufferedColor,
+                  playedColor: widget.sliderPlayedColor == null
+                      ? Color(0xFF22A3D2)
+                      : widget.sliderPlayedColor,
+                  backgroundColor: Color(0x5515162B),
+                  bufferedColor: widget.sliderBufferedColor == null
+                      ? Color(0x5583D8F7)
+                      : widget.sliderBufferedColor,
                 ),
                 padding: EdgeInsets.only(top: 2),
               ),
@@ -423,16 +443,19 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
     return ValueListenableBuilder(
       valueListenable: _controller,
       builder: (context, VideoPlayerValue value, child) {
-        if (!value.hasError && value.initialized) {
+        if (!value.hasError && value.isInitialized) {
           return Row(
             children: <Widget>[
               Container(
                 width: 46,
                 alignment: Alignment(0, 0),
-                child: Text(value.position.inMinutes.toString() +
-                    ':' +
-                    (value.position.inSeconds - value.position.inMinutes * 60)
-                        .toString(), style: widget.videoStartStyle),
+                child: Text(
+                    value.position.inMinutes.toString() +
+                        ':' +
+                        (value.position.inSeconds -
+                                value.position.inMinutes * 60)
+                            .toString(),
+                    style: widget.videoStartStyle),
               ),
               Container(
                 height: 20,
@@ -441,9 +464,13 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                   _controller,
                   allowScrubbing: true,
                   colors: VideoProgressColors(
-                    playedColor: widget.sliderPlayedColor == null ? Color(0xFF22A3D2) : widget.sliderPlayedColor,
+                    playedColor: widget.sliderPlayedColor == null
+                        ? Color(0xFF22A3D2)
+                        : widget.sliderPlayedColor,
                     backgroundColor: Color(0x5515162B),
-                    bufferedColor: widget.sliderBufferedColor == null ?Color(0x5583D8F7): widget.sliderBufferedColor,
+                    bufferedColor: widget.sliderBufferedColor == null
+                        ? Color(0x5583D8F7)
+                        : widget.sliderBufferedColor,
                   ),
                   padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                 ),
@@ -451,10 +478,13 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
               Container(
                 width: 46,
                 alignment: Alignment(0, 0),
-                child: Text(value.duration.inMinutes.toString() +
-                    ':' +
-                    (value.duration.inSeconds - value.duration.inMinutes * 60)
-                        .toString(), style: widget.videoEndStyle),
+                child: Text(
+                    value.duration.inMinutes.toString() +
+                        ':' +
+                        (value.duration.inSeconds -
+                                value.duration.inMinutes * 60)
+                            .toString(),
+                    style: widget.videoEndStyle),
               ),
             ],
           );
