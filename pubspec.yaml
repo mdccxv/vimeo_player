@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   video_player: '>=0.10.0 <2.0.0'
-  http: ^0.12.1
+  http: ^0.13.0
   # cupertino_icons: ^1.0.0 # Remove this
 
 dev_dependencies:
